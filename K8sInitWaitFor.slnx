@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/K8sInitWaitFor/K8sInitWaitFor.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/K8sInitWaitFor.Tests/K8sInitWaitFor.Tests.csproj" />
+  </Folder>
+</Solution>
