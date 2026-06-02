@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0-noble-aot AS build
+# Native AOT needs a linker for the target architecture. Buildx runs each
+# platform build on its target SDK image, avoiding cross-compiler setup.
+FROM mcr.microsoft.com/dotnet/sdk:10.0-noble-aot AS build
 ARG TARGETARCH
 WORKDIR /src
 
