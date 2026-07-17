@@ -114,7 +114,7 @@ public sealed class ResourceWaiter(IKubernetesResourceClient client, IConsole co
 
         var isReady = failureMode switch
         {
-            FailureMode.RequireSuccess => active == 0 && succeeded > 0 && hasCompleteCondition && !hasFailedCondition && failed == 0,
+            FailureMode.RequireSuccess => active == 0 && succeeded > 0 && hasCompleteCondition && !hasFailedCondition,
             FailureMode.TreatErrorsAsReady => active == 0 && (succeeded > 0 || failed > 0 || hasCompleteCondition || hasFailedCondition),
             FailureMode.RequireAnySuccess => active == 0 && succeeded > 0,
             _ => false

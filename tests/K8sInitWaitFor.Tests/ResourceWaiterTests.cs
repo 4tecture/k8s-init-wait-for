@@ -44,9 +44,19 @@ public sealed class ResourceWaiterTests
     }
 
     [Fact]
-    public void JobRequireSuccessDoesNotAllowFailedPods()
+    public void JobRequireSuccessAllowsSuccessfulRetry()
     {
         var status = ResourceWaiter.EvaluateJob(Job("db", active: 0, succeeded: 1, failed: 1, complete: true), FailureMode.RequireSuccess);
+
+        Assert.True(status.IsReady);
+    }
+
+    [Fact]
+    public void JobRequireSuccessDoesNotAllowFailedJobCondition()
+    {
+        var status = ResourceWaiter.EvaluateJob(
+            Job("db", active: 0, succeeded: 1, failed: 1, complete: true, failedCondition: true),
+            FailureMode.RequireSuccess);
 
         Assert.False(status.IsReady);
     }
